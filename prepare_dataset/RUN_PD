@@ -1,0 +1,8 @@
+#!/usr/bin/env php
+<?php
+require_once("prepareDataset.php");
+
+$obj_pd=new PrepareDataset();
+$obj_pd->buildDataset();
+
+?>

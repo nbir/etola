@@ -1,0 +1,20 @@
+#!/usr/bin/env php
+<?php
+//COMBINE TWEET FILES
+require_once("featureExtractor.php");
+
+class TestClass
+{
+	function __construct()
+	{
+		$s="This is a very nice house. How much does it cost? Is it built along with the other buildings? Who is the seller? Does hr really want to sell it!";
+		
+		$obj_fe=new FeatureExtractor();
+		$s=$obj_fe->getFeatures($s);
+		
+		print_r($s);
+	}
+}
+
+$temp=new TestClass();
+?>

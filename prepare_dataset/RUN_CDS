@@ -1,0 +1,22 @@
+#!/usr/bin/env php
+<?php
+require_once("countDatasetSize.php");
+
+$obj_pd=new CountDatasetSize();
+$count=$obj_pd->getDatasetSize("Reuters2388");
+
+
+foreach($count as $feature=>$value)
+{
+    print($feature."\t".$value."\n");
+}
+print("\n");
+/*
+foreach($count as $feature=>$value)
+{
+    print($value."\n");
+}
+print("\n");
+*/
+print("\nTOTAL = ".array_sum($count)."/".count($count)."\n")
+?>

@@ -1,0 +1,55 @@
+#!/usr/bin/env php
+<?php
+
+require_once("evaluation.php");
+
+$arr_dataset=array("Reuters343", "Reuters2388", "cicling2002", "hepex", "KnCr");
+$arr_algo=array("FF", "DFO", "FFP", "DFOP", "KM1", "KM2", "KM3", "KM4", "KM5", "KM6", "KM7", "KM8", "KM9", "KM10");
+
+foreach($arr_dataset as $dataset)
+{
+	print("\n");
+	/* For finding best value among KM */
+	$km_purity=array();
+	$km_entropy=array();
+	$km_fmeasure=array();
+	
+	foreach($arr_algo as $algo)
+	{
+		if(file_exists("../_results/result.".$dataset.".".$algo))
+		{
+			$obj_e=new Evaluation($dataset.".".$algo);
+			$obj_e->evaluate();
+			
+			
+			if(substr($algo, 0, 2) == "KM")	/* Storing values for KM for current dataset */
+			{
+				$km_purity[$algo]=$obj_e->purity;
+				$km_entropy[$algo]=$obj_e->entropy;
+				$km_fmeasure[$algo]=$obj_e->fmeasure;
+			}
+		}
+	}
+	
+	arsort($km_purity);
+	asort($km_entropy);
+	arsort($km_fmeasure);
+	
+	print("Purity:\t\t");
+	foreach($km_purity as $algo=>$val)
+	{
+		print($algo.", ");
+	}
+	print("\nEntropy:\t");
+	foreach($km_entropy as $algo=>$val)
+	{
+		print($algo.", ");
+	}
+	print("\nF measure:\t");
+	foreach($km_fmeasure as $algo=>$val)
+	{
+		print($algo.", ");
+	}
+	print("\n");
+}
+?>

@@ -1,0 +1,8 @@
+#!/usr/bin/env php
+<?php
+
+require_once("convertDataset.php");
+
+$obj_cd=new ConvertDataset;
+$obj_cd->convertType1("KnCr.col", "KnCr.goldstd");
+?>

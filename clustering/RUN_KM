@@ -1,0 +1,48 @@
+#!/usr/bin/env php
+<?php
+
+require_once("loadCorpus.php");
+require_once("kMeans.php");
+
+for($i=1;$i<=10;$i++)
+{
+	$obj_lc=new LoadCorpus();
+	//$corpus=$obj_lc->getClusteredHeadlines("test");
+	$corpus=$obj_lc->getAllHeadlines("KnCr");
+
+	$obj_km=new kMeans();
+	$clusters=$obj_km->cluster($corpus, 18);
+
+
+
+
+
+	//$obj_lc->writeOutputToFile($clusters)
+	$obj_lc->writeDocIdListToFile($clusters, "KM".$i);
+}
+/*
+foreach($clusters as $feature=>$cluster)
+{
+	print($feature."\t\t".count($cluster)."\n");
+}
+*/
+
+
+/*
+$count=array();
+foreach($clusters as $feature=>$cluster)
+{
+	$count[$feature]=count($cluster);
+}
+arsort($count);
+foreach($count as $feature=>$cluster)
+{
+	print($feature."\n");
+}
+print("\n");
+foreach($count as $feature=>$cluster)
+{
+	print($cluster."\n");
+}
+*/
+?>

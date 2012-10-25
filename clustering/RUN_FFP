@@ -1,0 +1,43 @@
+#!/usr/bin/env php
+<?php
+
+require_once("loadCorpus.php");
+require_once("freqentFeaturePOS.php");
+require_once("refinementKMeans.php");
+
+$obj_lc=new LoadCorpus();
+//$corpus=$obj_lc->getClusteredHeadlines("test");
+$corpus=$obj_lc->getAllHeadlines("Reuters2388");
+
+$obj_im=new FreqentFeaturePOS();
+$clusters=$obj_im->cluster($corpus);
+
+/* Refinement */
+$obj_km=new kMeans();
+$clusters=$obj_km->cluster($clusters);
+
+//$obj_lc->writeOutputToFile($clusters)
+$obj_lc->writeDocIdListToFile($clusters, "FFP");
+
+//print_r($clusters);
+//print(count($clusters)."\n");
+
+/*
+foreach($clusters as $feature=>$cluster)
+{
+	print($feature." ".count($cluster)."\n");
+}
+*/
+
+/*
+foreach($clusters as $feature=>$cluster)
+{
+	print($feature."\n");
+}
+print("\n");
+foreach($clusters as $feature=>$cluster)
+{
+	print(count($cluster)."\n");
+}
+*/
+?>

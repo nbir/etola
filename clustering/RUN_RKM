@@ -1,0 +1,24 @@
+#!/usr/bin/env php
+<?php
+
+require_once("loadCorpus.php");
+require_once("refinementKMeans.php");
+
+
+$obj_lc=new LoadCorpus();
+$corpus=$obj_lc->getClusteredHeadlines("final");
+//$corpus=$obj_lc->getAllHeadlines("final");
+
+$obj_km=new kMeans();
+$clusters=$obj_km->cluster($corpus);
+
+
+
+
+
+//$obj_lc->writeOutputToFile($clusters)
+$obj_lc->writeDocIdListToFile($clusters, "RKM");
+
+//print_r($corpus);
+
+?>
